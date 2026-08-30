@@ -1,8 +1,8 @@
+import { FormEvent, useCallback, useRef, useState } from 'react';
 import clsx from 'clsx';
 
 import { ArrowButton } from 'src/ui/arrow-button';
 import { Button } from 'src/ui/button';
-import { FormEvent, useCallback, useRef, useState } from 'react';
 import { useOutsideClickClose } from './hooks/useOutsideClickClose';
 import { Text } from 'src/ui/text';
 import { Select } from 'src/ui/select';
@@ -82,32 +82,37 @@ export const ArticleParamsForm = ({
 						options={fontFamilyOptions}
 						placeholder='Выберите шрифт'
 						onChange={handleChange('fontFamilyOption')}
-						title='Шрифт'></Select>
+						title='Шрифт'
+					/>
 					<RadioGroup
 						name='fontSize'
 						options={fontSizeOptions}
 						selected={formState.fontSizeOption}
 						onChange={handleChange('fontSizeOption')}
-						title='Размер шрифта'></RadioGroup>
+						title='Размер шрифта'
+					/>
 					<Select
 						selected={formState.fontColor}
 						options={fontColors}
 						placeholder='Выберите цвет шрифта'
 						onChange={handleChange('fontColor')}
-						title='Цвет шрифта'></Select>
-					<Separator></Separator>
+						title='Цвет шрифта'
+					/>
+					<Separator />
 					<Select
 						selected={formState.backgroundColor}
 						options={backgroundColors}
 						placeholder='Выберите цвет фона'
 						onChange={handleChange('backgroundColor')}
-						title='Цвет фона'></Select>
+						title='Цвет фона'
+					/>
 					<Select
 						selected={formState.contentWidth}
 						options={contentWidthArr}
 						placeholder='Выберите ширину контента'
 						onChange={handleChange('contentWidth')}
-						title='Ширина контента'></Select>
+						title='Ширина контента'
+					/>
 					<div className={styles.bottomContainer}>
 						<Button title='Сбросить' htmlType='reset' type='clear' />
 						<Button title='Применить' htmlType='submit' type='apply' />
