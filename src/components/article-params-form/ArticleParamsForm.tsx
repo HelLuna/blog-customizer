@@ -2,7 +2,8 @@ import clsx from 'clsx';
 
 import { ArrowButton } from 'src/ui/arrow-button';
 import { Button } from 'src/ui/button';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useCallback, useRef, useState } from 'react';
+import { useOutsideClickClose } from './hooks/useOutsideClickClose';
 import { Text } from 'src/ui/text';
 import { Select } from 'src/ui/select';
 import { RadioGroup } from 'src/ui/radio-group';
@@ -32,6 +33,7 @@ export const ArticleParamsForm = ({
 	const [isAsideOpen, setIsAsideOpen] = useState<boolean>(false);
 	const [formState, setFormState] =
 		useState<ArticleStateType>(currentArticleState);
+	const rootRef = useRef<HTMLDivElement | null>(null);
 
 	const handleChange = (key: keyof ArticleStateType) => (value: OptionType) => {
 		setFormState((prev) => ({ ...prev, [key]: value }));
@@ -47,8 +49,16 @@ export const ArticleParamsForm = ({
 		onApply(defaultArticleState);
 	};
 
+	const handleClose = useCallback(() => setIsAsideOpen(false), []);
+
+	useOutsideClickClose({
+		isOpen: isAsideOpen,
+		onClose: handleClose,
+		rootRef,
+	});
+
 	return (
-		<>
+		<div ref={rootRef}>
 			<ArrowButton
 				isOpen={isAsideOpen}
 				onClick={() => {
@@ -104,6 +114,6 @@ export const ArticleParamsForm = ({
 					</div>
 				</form>
 			</aside>
-		</>
+		</div>
 	);
 };
